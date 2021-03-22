@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="messp1" placeholder="nhap mess">
+<button onclick="sendMessP1('messp1',Iphone,Samsung)">Send</button>
+<br>
+<br>
+<textarea id="inboxp1" placeholder="inbox"></textarea><br>
+<textarea id="inboxsendp1" placeholder="inboxSend"></textarea>
+<br>
+<br>
+<br>
+<input id="messp2" placeholder="nhap mess">
+<button onclick="sendMessP1('messp2',Samsung,Iphone)">Send</button>
+<br>
+<br>
+<textarea id="inboxp2" placeholder="inbox"></textarea><br>
+<textarea id="inboxsendp2" placeholder="inboxSend"></textarea>
+</body>
+</html>
+<script>
+    class Phone{
+        constructor(status,pin,mess) {
+            this.status = status;
+            this.pin = pin;
+            this.mess = mess;
+            this.inbox = ['toan'];
+            this.inboxSend = ['toan2'];
+        }
+        sendMess = function (phone,mess){
+            this.inboxSend.push(mess);
+            phone.inbox.push(mess);
+            this.truPin();
+        }
+        truPin = function (){
+            this.pin --;
+        }
+        xacPin = function (){
+            this.pin ++;
+        }
+        reardInbox = function (){
+            let str ='';
+            for (let i=0;i<this.inbox.length;i++){
+                str += this.inbox[i] + '\n';
+            }
+            this.truPin();
+            return str;
+        }
+        reardInboxSend = function (){
+            let str ='';
+            for (let i=0;i<this.inboxSend.length;i++){
+                str += this.inboxSend[i] + '\n';
+            }
+            this.truPin();
+            return str;
+        }
+    }
+    let Iphone = new Phone(true,10,'');
+    let Samsung = new Phone(true,5,'');
+    function showMessP1(idbox,idboxsend,phone){
+        document.getElementById(idbox).value = phone.reardInbox();
+        document.getElementById(idboxsend).value = phone.reardInboxSend();
+    }
+    // function showMessP2(){
+    //     document.getElementById('inboxp2').value = Samsung.reardInbox();
+    //     document.getElementById('inboxsendp2').value = Samsung.reardInboxSend();
+    // }
+    function sendMessP1(idmess,phonesend,phoneNhan,){
+        let mess = document.getElementById(idmess).value;
+        phonesend.sendMess(phoneNhan,mess);
+        showMessP1('inboxp1','inboxsendp1',Iphone);
+        showMessP1('inboxp2','inboxsendp2',Samsung);
+    }
+    // function sendMessP2(){
+    //     let mess = document.getElementById('messp2').value;
+    //     Samsung.sendMess(Iphone,mess);
+    //     showMessP1();
+    //     showMessP2();
+    // }
+    showMessP1('inboxp1','inboxsendp1',Iphone);
+    showMessP1('inboxp2','inboxsendp2',Samsung);
+</script>
+</body>
+</html>
