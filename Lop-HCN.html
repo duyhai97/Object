@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas><br/><br/>
 <script>
     class Rectangle{
         constructor(width, height) {
@@ -18,8 +20,19 @@
             return this.width*this.height;
 
         }
+        drawCanvas(x, y){
+            let e = document.getElementById("myCanvas");
+            let ctx = e.getContext("2d");
+            ctx.fillStyle = "#00FF99";
+            ctx.fillRect(50, 50, 200, 100);
+
+            ctx.arc(100, 100, 50, 0, 2*Math.PI)
+        }
+
     }
-    let aa = new Rectangle(10, 15)
+
+    let aa = new Rectangle(100, 200)
+    aa.drawCanvas(100, 200)
     document.write("chu vi: " + aa.getPerimeter() + "<br/>");
     document.write("dien tich: " + aa.getArea())
 
